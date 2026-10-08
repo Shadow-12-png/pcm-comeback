@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#08090d">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PCM Comeback">
+<link rel="manifest" href="manifest.webmanifest">
+<title>PCM Comeback</title>
+<style>
+:root{--bg:#07080c;--card:#11131a;--card2:#171a23;--line:#292d3a;--text:#f6f7fb;--muted:#9ca3b4;--accent:#8b7cff;--good:#4ade80;--warn:#fbbf24}
+*{box-sizing:border-box}html{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:radial-gradient(circle at 85% -5%,#30295f 0,transparent 32%),var(--bg)}
+button{font:inherit;color:inherit}.app{width:min(760px,100%);margin:auto;padding:12px 14px 94px}
+.top{display:flex;justify-content:space-between;align-items:center;padding:12px 2px 8px}.brand{font-weight:900;letter-spacing:-.02em}.brand small{display:block;color:var(--accent);font-size:10px;letter-spacing:.16em}
+.iconbtn{width:42px;height:42px;border:1px solid var(--line);border-radius:13px;background:var(--card);cursor:pointer}
+h1{font-size:30px;line-height:1.05;margin:14px 0 5px}.sub{color:var(--muted);font-size:13px}
+.card{background:rgba(17,19,26,.96);border:1px solid var(--line);border-radius:19px;padding:16px;margin:12px 0;box-shadow:0 12px 34px #0003}
+.hero{padding:20px;background:linear-gradient(145deg,#17152b,#11131a 62%)}.eyebrow{color:var(--accent);font-weight:850;font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+.hero h2{font-size:23px;margin:7px 0}.mission{font-size:14px;line-height:1.55;color:#dfe2ea}
+.progress{height:10px;background:#252936;border-radius:99px;overflow:hidden;margin:14px 0 8px}.progress>div{height:100%;width:0;background:linear-gradient(90deg,var(--accent),#c5bfff);transition:.3s}
+.progressline{display:flex;justify-content:space-between;color:var(--muted);font-size:11px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.btn{border:1px solid var(--line);background:var(--card2);border-radius:12px;padding:11px;cursor:pointer;font-weight:700}.primary{background:var(--accent);border-color:var(--accent)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.stat{background:var(--card2);border-radius:13px;padding:12px;text-align:center}.num{font-size:21px;font-weight:900}.lbl{font-size:10px;color:var(--muted);margin-top:2px}
+.section{font-size:17px;font-weight:900;margin:21px 2px 9px}
+.subjects{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.subject{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:13px}.subject b{font-size:14px}.subject .bar{height:6px;background:#282c38;border-radius:99px;overflow:hidden;margin-top:10px}.subject .bar div{height:100%;background:var(--accent);width:0}.subject small{color:var(--muted);font-size:10px}
+.day{display:grid;grid-template-columns:27px 1fr;gap:10px;align-items:start}.day.done{opacity:.56}.day.done .title{text-decoration:line-through}.check{width:23px;height:23px;accent-color:var(--accent);margin-top:2px}.meta{font-size:10px;color:var(--accent);font-weight:850;letter-spacing:.04em}.title{font-weight:850;margin-top:3px}.task{font-size:13px;line-height:1.5;color:#d6dae3;margin-top:4px}.off{border-style:dashed}.off .task{color:#aeb4c2}
+.tip{font-size:12px;color:var(--muted);line-height:1.45}.danger{border-color:#593039;color:#ffb8c0;background:#211116}
+.install{display:none}.install.show{display:block}
+.nav{position:fixed;bottom:0;left:0;right:0;background:#0d0f15ee;border-top:1px solid var(--line);backdrop-filter:blur(14px);padding:8px max(12px,calc((100vw - 760px)/2));display:grid;grid-template-columns:repeat(3,1fr);z-index:5}
+.nav button{border:0;background:transparent;color:var(--muted);font-size:11px;padding:7px;cursor:pointer}.nav button span{display:block;font-size:18px;margin-bottom:2px}
+footer{text-align:center;color:#666d7e;font-size:10px;margin-top:22px}
+@media(max-width:420px){.subjects{grid-template-columns:1fr}.stats .stat:nth-child(3){display:none}.stats{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="top"><div class="brand"><small>CLASS 11 • PCM</small>⚡ PCM COMEBACK</div><button class="iconbtn" id="installBtn" title="Install">＋</button></div>
+
+<section id="home">
+<h1>Make the comeback.</h1><div class="sub">10 Oct → 31 Oct 2026 • One-shots → Practice → Revision → Mocks</div>
+
+<div class="card hero">
+<div class="eyebrow" id="missionDate">TODAY'S MISSION</div>
+<h2 id="missionTitle">Loading...</h2>
+<div class="mission" id="missionText"></div>
+<div class="progress"><div id="bar"></div></div>
+<div class="progressline"><span id="progressText">0% complete</span><span id="streakText">🔥 0 day streak</span></div>
+<div class="actions"><button class="btn primary" id="completeToday">✓ Complete today</button><button class="btn" id="viewPlan">View full plan</button></div>
+</div>
+
+<div class="stats">
+<div class="stat"><div class="num" id="done">0</div><div class="lbl">DAYS DONE</div></div>
+<div class="stat"><div class="num" id="left">22</div><div class="lbl">REMAINING</div></div>
+<div class="stat"><div class="num" id="pct">0%</div><div class="lbl">PROGRESS</div></div>
+</div>
+
+<div class="section">Subject dashboard</div>
+<div class="subjects">
+<div class="subject"><b>⚡ Physics</b><div class="bar"><div id="pbar"></div></div><small id="ptext">0%</small></div>
+<div class="subject"><b>🧪 Chemistry</b><div class="bar"><div id="cbar"></div></div><small id="ctext">0%</small></div>
+<div class="subject"><b>📐 Maths</b><div class="bar"><div id="mbar"></div></div><small id="mtext">0%</small></div>
+</div>
+
+<div class="section">Comeback rules</div>
+<div class="card tip">1. Don't chase perfection. Finish the day's mission.<br>2. One-shot alone doesn't count — do DPP/NCERT/PYQs.<br>3. On revision days, attack mistakes instead of rewatching everything.<br>4. 11 Oct and 19 Oct stay completely free as planned.<br>5. 31 Oct = revision only. <b>No new chapters.</b></div>
+</section>
+
+<section id="plan">
+<div class="section">Full comeback plan</div>
+<div id="schedule"></div>
+</section>
+
+<section id="settings">
+<div class="section">App controls</div>
+<div class="card"><b>Progress is stored on this device.</b><p class="tip">You can close the app and your checkmarks will remain.</p><button class="btn danger" id="reset">Reset all progress</button></div>
+</section>
+
+<footer>Built for consistency. One day at a time.</footer>
+</div>
+
+<div class="nav">
+<button data-go="home"><span>⌂</span>Home</button>
+<button data-go="plan"><span>☷</span>Plan</button>
+<button data-go="settings"><span>⚙</span>Settings</button>
+</div>
+
+<script>
+const DAYS=[
+["2026-10-10","Sat • 10 Oct","FULL DAY","Physics: Ch 1 Physical World + Ch 2 Units & Measurements — one-shot + short notes. Maths: Ch 1 Sets — one-shot + NCERT examples. Practice: Physics DPP + Maths DPP."],
+["2026-10-11","Sun • 11 Oct","OFF — PLANS","Completely free. Enjoy your plans without guilt."],
+["2026-10-12","Mon • 12 Oct","9:30–12","Chemistry: Ch 1 Some Basic Concepts — one-shot + NCERT examples. Maths: Ch 2 Relations & Functions — one-shot. Practice: Chemistry DPP + Maths questions."],
+["2026-10-13","Tue • 13 Oct","9:30–12","Physics: Ch 3 Motion in a Straight Line — one-shot. Maths: Ch 3 Trigonometric Functions — one-shot + standard identities. Practice: Physics DPP + Maths examples."],
+["2026-10-14","Wed • 14 Oct","9:30–12","Chemistry: Ch 2 Structure of Atom — one-shot + NCERT. Maths: Ch 4 Mathematical Induction — one-shot + examples. Practice: Chemistry DPP + Maths DPP."],
+["2026-10-15","Thu • 15 Oct","9:30–12","Physics: Ch 4 Motion in a Plane — one-shot + formulas. Maths: Ch 5 Complex Numbers & Quadratic Equations — one-shot. Practice: Physics DPP + Maths examples."],
+["2026-10-16","Fri • 16 Oct","9:30–12","Chemistry: Ch 3 Classification & Periodicity — one-shot + NCERT trends. Maths: Ch 6 Linear Inequalities — one-shot + DPP."],
+["2026-10-17","Sat • 17 Oct","FULL DAY","Morning: Physics Ch 5 Laws of Motion — one-shot + DPP. Afternoon: Maths Ch 7 Permutations & Combinations — one-shot + examples. Evening: Chemistry Ch 4 Chemical Bonding — one-shot + NCERT. Night: mixed DPP/PYQs."],
+["2026-10-18","Sun • 18 Oct","FULL DAY","Morning: Physics Ch 6 Work, Energy & Power — one-shot + DPP. Afternoon: Maths Ch 8 Binomial Theorem + Ch 9 Sequences & Series. Evening: Chemistry Ch 5 Thermodynamics — one-shot + NCERT. Night: numericals + PYQs."],
+["2026-10-19","Mon • 19 Oct","OFF — PLANS","Completely free. No study target and no backlog punishment."],
+["2026-10-20","Tue • 20 Oct","9:30–12","Physics: Ch 7 System of Particles & Rotational Motion — first half of one-shot. Maths: Ch 10 Straight Lines — one-shot. Practice: Maths examples + Physics numericals."],
+["2026-10-21","Wed • 21 Oct","9:30–12","Physics: Finish Ch 7 + DPP. Chemistry: Ch 1–3 rapid NCERT revision + numericals/trends. Practice: Chemistry PYQs."],
+["2026-10-22","Thu • 22 Oct","9:30–12","Physics: Ch 8 Gravitation — one-shot + DPP. Maths: Ch 11 Conic Sections — one-shot + standard examples. Practice: Physics PYQs."],
+["2026-10-23","Fri • 23 Oct","9:30–12","Maths: Ch 12 3D Geometry + Ch 13 Limits & Derivatives — one-shots + examples. Chemistry: Ch 4–5 NCERT revision. Practice: Maths DPP/PYQs."],
+["2026-10-24","Sat • 24 Oct","FULL DAY","Morning: Maths Ch 14 Statistics + Probability — one-shot + examples. Afternoon: Maths Ch 1–7 first revision + DPP/PYQs. Evening: Physics Ch 1–4 revision + numericals. Night: Chemistry Ch 1–3 revision + NCERT."],
+["2026-10-25","Sun • 25 Oct","FULL DAY","Morning: Maths Ch 8–14 revision + PYQs. Afternoon: Physics Ch 5–8 revision + DPP/PYQs. Evening: Chemistry Ch 4–5 revision + numericals/NCERT. Night: create final weak-topic lists."],
+["2026-10-26","Mon • 26 Oct","9:30–12","Physics: timed mixed question set. Chemistry: timed NCERT/PYQ set. Final 30 min: analyse mistakes — concept, formula or calculation."],
+["2026-10-27","Tue • 27 Oct","9:30–12","Maths: timed mixed paper/set. Check every wrong question and redo without looking at the solution. Final 30 min: formula revision."],
+["2026-10-28","Wed • 28 Oct","9:30–12","Physics mock test. Check it and revise only mistakes/weak chapters. Final 20 min: formula sheet."],
+["2026-10-29","Thu • 29 Oct","9:30–12","Chemistry mock test. Check it, correct from NCERT, and revise formulas/concepts."],
+["2026-10-30","Fri • 30 Oct","9:30–12","Maths full timed paper. Check it and redo every wrong/guessed question. Final 20 min: formulas + standard question types."],
+["2026-10-31","Sat • 31 Oct","FULL DAY","Morning: Physics final revision + weak numericals. Afternoon: Chemistry final NCERT + formulas. Evening: Maths formulas + weak questions. Night: light revision only. NO NEW CHAPTERS."]
+];
+const KEY="pcm-comeback-v3";let state=JSON.parse(localStorage.getItem(KEY)||"{}");
+const schedule=document.getElementById("schedule");
+function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+function dateIso(){let d=new Date();return new Date(d.getTime()-d.getTimezoneOffset()*60000).toISOString().slice(0,10)}
+function streak(){let s=0;for(let i=DAYS.length-1;i>=0;i--){if(state[i])s++;else if(s)break}return s}
+function subjectStats(){
+ let p=0,c=0,m=0,pt=0,ct=0,mt=0;
+ DAYS.forEach((d,i)=>{if(/Physics/i.test(d[3]))pt++;if(/Chemistry/i.test(d[3]))ct++;if(/Maths/i.test(d[3]))mt++;if(state[i]&&/Physics/i.test(d[3]))p++;if(state[i]&&/Chemistry/i.test(d[3]))c++;if(state[i]&&/Maths/i.test(d[3]))m++;});
+ return [p,pt,c,ct,m,mt];
+}
+function update(){
+ const n=DAYS.reduce((a,_,i)=>a+(state[i]?1:0),0),pc=Math.round(n/DAYS.length*100);
+ done.textContent=n;left.textContent=DAYS.length-n;pct.textContent=pc+"%";bar.style.width=pc+"%";progressText.textContent=pc+"% complete";streakText.textContent="🔥 "+streak()+" day streak";
+ let [p,pt,c,ct,m,mt]=subjectStats();
+ [["pbar",p/pt,"ptext"],["cbar",c/ct,"ctext"],["mbar",m/mt,"mtext"]].forEach(x=>{document.getElementById(x[0]).style.width=(x[1]*100)+"%";document.getElementById(x[2]).textContent=Math.round(x[1]*100)+"% complete"});
+ document.querySelectorAll(".day").forEach((el,i)=>el.classList.toggle("done",!!state[i]));
+ const today=dateIso(),idx=DAYS.findIndex(d=>d[0]===today),i=idx>=0?idx:0,d=DAYS[i];
+ missionDate.textContent=(idx>=0?"TODAY'S MISSION":"CURRENT PLAN")+" • "+d[1]+" • "+d[2];missionTitle.textContent=d[2].startsWith("OFF")?"Recovery / Plans":d[1];missionText.textContent=d[3];
+ completeToday.textContent=state[i]?"✓ Completed":"✓ Complete today";completeToday.disabled=!!state[i];completeToday.style.opacity=state[i]?.65:1;
+}
+DAYS.forEach((d,i)=>{let el=document.createElement("section");el.className="card day"+(d[2].startsWith("OFF")?" off":"");el.id="day-"+d[0];el.innerHTML=`<input class="check" type="checkbox" ${state[i]?"checked":""}><div><div class="meta">${d[1]} • ${d[2]}</div><div class="title">${d[2].startsWith("OFF")?"Free day":d[3].split(". ")[0]}</div><div class="task">${d[3]}</div></div>`;el.querySelector("input").onchange=e=>{state[i]=e.target.checked;save();update()};schedule.appendChild(el)});
+completeToday.onclick=()=>{let idx=DAYS.findIndex(d=>d[0]===dateIso());if(idx<0)idx=0;state[idx]=true;save();document.querySelectorAll(".day")[idx].querySelector("input").checked=true;update()};
+viewPlan.onclick=()=>document.getElementById("plan").scrollIntoView({behavior:"smooth"});
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.go).scrollIntoView({behavior:"smooth"}));
+reset.onclick=()=>{if(confirm("Reset all comeback progress?")){state={};save();document.querySelectorAll(".check").forEach(x=>x.checked=false);update()}};
+let deferred;window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();deferred=e;installBtn.classList.add("show")});
+installBtn.onclick=async()=>{if(deferred){deferred.prompt();await deferred.userChoice;deferred=null}};
+if("serviceWorker"in navigator)window.addEventListener("load",()=>navigator.serviceWorker.register("sw.js"));
+update();
+</script>
+</body>
+</html>
